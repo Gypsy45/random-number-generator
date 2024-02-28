@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tahmin Oyunu</title>
+</head>
+<body>
+
+<label id="guess-label"></label><br>
+<input type="number" id="guess-input">
+<button onclick="checkGuess()">Tahmin yap</button>
+<hr>
+<label id="result-label"></label>
+
+<script>
+  
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    let guessCount = 1;
+
+    
+    function checkGuess() {
+        const guess = parseInt(document.getElementById("guess-input").value);
+        const resultLabel = document.getElementById("result-label");
+        
+        if (guess === randomNumber) {
+            resultLabel.textContent = "Sayı " + guessCount + " adet denemede bulundu.";
+            resultLabel.style.color = "green";
+            document.getElementById("guess-input").disabled = true;
+        } else if (guessCount === 7) {
+            resultLabel.textContent = "Deneme hakkınız kalmadı. Kaybettiniz.";
+            resultLabel.style.color = "red";
+            document.getElementById("guess-input").disabled = true;
+        } else {
+            resultLabel.style.color = "black";
+            if (guess < randomNumber) {
+                resultLabel.textContent = "Daha büyük bir sayı girin.";
+            } else {
+                resultLabel.textContent = "Daha küçük bir sayı girin.";
+            }
+            guessCount++;
+            document.getElementById("guess-label").textContent = guessCount + ". tahmini girin:";
+        }
+    }
+</script>
+
+</body>
+</html>
